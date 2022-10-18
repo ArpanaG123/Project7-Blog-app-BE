@@ -7,7 +7,8 @@ const Bollywood = () => {
     const[api, setApi] = useState([])
     const fetchData = async () => {
         try {
-          const response = await axios.get("https://node-react-blog-app.herokuapp.com/api/home");
+          const response = await axios.get("https://reactblog-backendapp.herokuapp.com/api/home");
+          console.log(response);
           return response.data;
         } catch (error) {}
       };

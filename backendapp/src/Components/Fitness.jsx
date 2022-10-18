@@ -1,10 +1,23 @@
 import './Style.css'
-import React,{useContext} from 'react'
-import { store } from './Data';
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Fitness = () => {
-    const [data] = useContext(store);
+    const[api, setApi] = useState([])
+    const fetchData = async () => {
+        try {
+          const response = await axios.get("https://reactblog-backendapp.herokuapp.com/api/home");
+          console.log(response);
+          return response.data;
+        } catch (error) {}
+      };
+      useEffect(() => {
+        const apiFetch = async () => {
+            setApi(await fetchData());
+        };
+        apiFetch();
+      }, [api]);
     return (
         <div>
             <hr className="line"></hr>
@@ -13,7 +26,7 @@ const Fitness = () => {
             <div className='bolly-left'>
                 <div className='bollyone'>
                     {
-                        data.filter((data) => data.Category === "Fitness").map((data) => (
+                        api.filter((data) => data.Category === "Fitness").map((data) => (
                             <div className='leftData'>
                                 <div key = {data.id}>
                                     <Link to={`/Fitness/${data.id}`}>
@@ -30,7 +43,7 @@ const Fitness = () => {
             <div className='bolly-right-new'><h2 className='bHi'>Top Posts</h2><hr className='line2'></hr>
                 <div className='bollytwo'>
                     {
-                        data.filter((data) => data.Category === "Fitness").map((data) => (
+                        api.filter((data) => data.Category === "Fitness").map((data) => (
                             <div className='leftData'>
                                 <div key = {data.id}>
                                     <Link to={`/Fitness/${data.id}`}>

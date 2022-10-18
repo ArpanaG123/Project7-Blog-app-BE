@@ -1,10 +1,23 @@
 import './Style.css'
-import React,{useContext} from 'react';
-import { store } from './Data';
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-    const [data] = useContext(store);
+    const[api, setApi] = useState([])
+    const fetchData = async () => {
+        try {
+          const response = await axios.get("https://reactblog-backendapp.herokuapp.com/api/home");
+          console.log(response);
+          return response.data;
+        } catch (error) {}
+      };
+      useEffect(() => {
+        const apiFetch = async () => {
+            setApi(await fetchData());
+        };
+        apiFetch();
+      }, [api]);
     return (
         <div>
             <hr className="line"></hr>
@@ -24,7 +37,7 @@ const Home = () => {
             </div>
             <div className='div1'>
                     {
-                        data.filter((data) => data.Category === "Technology").map((data) => (
+                        api.filter((data) => data.Category === "Technology").map((data) => (
                             <div className='leftData'>
                                 <div key = {data.id}>
                                     <Link to={`/Technology/${data.id}`}>
@@ -43,7 +56,7 @@ const Home = () => {
             </div>
             <div className='div1'>
                     {
-                        data.filter((data) => data.Category === "Bollywood").map((data) => (
+                        api.filter((data) => data.Category === "Bollywood").map((data) => (
                             <div className='leftData'>
                                 <div key = {data.id}>
                                     <Link to={`/Bollywood/${data.id}`}>
@@ -62,7 +75,7 @@ const Home = () => {
             </div>
             <div className='div2'>
                     {
-                        data.filter((data) => data.Category === "Food").map((data) => (
+                        api.filter((data) => data.Category === "Food").map((data) => (
                             <div className='leftData'>
                                 <div key = {data.id}>
                                     <Link to={`/Food/${data.id}`}>
