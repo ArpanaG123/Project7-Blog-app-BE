@@ -6,18 +6,13 @@ import { Link } from 'react-router-dom';
 const Tourism = () => {
     const[api, setApi] = useState([])
     const fetchData = async () => {
-        try {
-          const response = await axios.get("https://reactblog-backendapp.herokuapp.com/api/home");
-          console.log(response);
-          return response.data;
-        } catch (error) {}
+        const response = await axios.get("https://reactblog-backendapp.herokuapp.com/api/home");
+        console.log(response);
+        setApi(response.data);
       };
       useEffect(() => {
-        const apiFetch = async () => {
-            setApi(await fetchData());
-        };
-        apiFetch();
-      }, [api]);
+        fetchData();
+      },[]);
     return (
         <div>
             <hr className="line"></hr>

@@ -18,8 +18,8 @@ function App() {
       <p>The</p>
     </div>
     <h1 className='siren'>Siren</h1>
-    <Data>
     <Navigation />
+    <Data>
     <Routes>
       <Route path='/' exact element = {<Home />} />
       <Route path='/Category/Bollywood' element = {<Bollywood />} />
