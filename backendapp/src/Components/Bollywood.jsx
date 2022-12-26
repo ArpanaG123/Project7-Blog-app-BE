@@ -6,7 +6,7 @@ import axios from 'axios'
 const Bollywood = () => {
     const[api, setApi] = useState([])
     const fetchData = async () => {
-        const response = await axios.get("http://localhost:9000/api/home");
+        const response = await axios.get("https://project7-react-blog-backendapp-ptxzypcef-arpanag123.vercel.app/api/home");
         console.log(response);
         setApi(response.data);
       };
