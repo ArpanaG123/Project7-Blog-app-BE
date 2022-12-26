@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
     const[api, setApi] = useState([])
     const fetchData = async () => {
-        const response = await axios.get("https://reactblog-backendapp.herokuapp.com/api/home");
+        const response = await axios.get("http://localhost:9000/api/home");
         console.log(response);
         setApi(response.data);
       };
